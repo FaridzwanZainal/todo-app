@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="title">TODOS</div>
+  <form>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter todo"
+        name="text"
+        [(ngModel)]="todo.text"
+        (keyup.enter)="saveTodo(todoId)"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="saveTodo(todoId)"
+        >
+          {{ buttonText }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <ng-container *ngIf="todos.length > 0; else noData">
+    <table class="my-20">
+      <tr>
+        <th>No</th>
+        <th>Todos</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let todo of todos; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ todo.text }}</td>
+        <td>
+          <button class="success mx-2" (click)="getTodoById(todo.id)">
+            Edit
+          </button>
+          <button class="danger mx-2" (click)="deleteTodo(todo.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+
+  <ng-template #noData> <div class="my-20">No todos recorded</div></ng-template>
+</div>
